@@ -14,6 +14,7 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
+  // Random generator for simulating failures
   private Random generator = new Random();
 
   public TorpedoStore(int numberOfTorpedos){
@@ -31,6 +32,7 @@ public class TorpedoStore {
   }
 
   public boolean fire(int numberOfTorpedos) throws IllegalArgumentException {
+    // throws exception if trying to fire more torpedos than available
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
       throw new IllegalArgumentException("numberOfTorpedos");
     }
@@ -42,6 +44,7 @@ public class TorpedoStore {
 
     if (r >= FAILURE_RATE) {
       // successful firing
+      // decrease number of available torpedos
       this.torpedoCount -= numberOfTorpedos;
       success = true;
     } else {
